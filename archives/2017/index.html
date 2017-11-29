@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="初学Hexo，想把电脑吃了">
+<meta name="description" content="转行吧，趁早啊，反正头发迟早要掉光光的">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ZhaoBin">
+<meta property="og:title" content="Bin">
 <meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
-<meta property="og:site_name" content="ZhaoBin">
-<meta property="og:description" content="初学Hexo，想把电脑吃了">
+<meta property="og:site_name" content="Bin">
+<meta property="og:description" content="转行吧，趁早啊，反正头发迟早要掉光光的">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZhaoBin">
-<meta name="twitter:description" content="初学Hexo，想把电脑吃了">
+<meta name="twitter:title" content="Bin">
+<meta name="twitter:description" content="转行吧，趁早啊，反正头发迟早要掉光光的">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <title>归档 | ZhaoBin</title>
+  <title>归档 | Bin</title>
   
 
 
@@ -154,12 +154,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhaoBin</span>
+        <span class="site-title">Bin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">Hexo甄姬儿麻烦</p>
+        <p class="site-subtitle">写点段子，下下馆子</p>
       
   </div>
 
@@ -378,7 +378,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Bin</p>
-              <p class="site-description motion-element" itemprop="description">初学Hexo，想把电脑吃了</p>
+              <p class="site-description motion-element" itemprop="description">转行吧，趁早啊，反正头发迟早要掉光光的</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -396,6 +396,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
@@ -615,6 +624,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'thXkwGh2zrirfE6RqbjOAixt-gzGzoHsz# your leancloud application appid',
+        appKey: 'c664svjmUwPMTuXueGqF2deB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
