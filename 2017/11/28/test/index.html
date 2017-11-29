@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Bin">
 <meta property="og:description" content="大标题第一篇博客 并不知道写什么好  所以决定在这里熟悉一下markdown语言    引用功能 如果需要使用引用的格式，就在文本前插入 &amp;gt; （大于号）  样式就是像上面这样，但是要记住多空一行，不然会被识别到引用的部分去。 图片与链接 图片的插入方式是： ![]()  链接的插入方式是： []()  这里插入一个百度的链接 Baidu  图片懒得插了，还得琢磨一下图床是怎么回事 插入代码代">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T15:30:58.498Z">
+<meta property="og:updated_time" content="2017-11-29T15:45:21.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="光电🐶的Hexo首发">
 <meta name="twitter:description" content="大标题第一篇博客 并不知道写什么好  所以决定在这里熟悉一下markdown语言    引用功能 如果需要使用引用的格式，就在文本前插入 &amp;gt; （大于号）  样式就是像上面这样，但是要记住多空一行，不然会被识别到引用的部分去。 图片与链接 图片的插入方式是： ![]()  链接的插入方式是： []()  这里插入一个百度的链接 Baidu  图片懒得插了，还得琢磨一下图床是怎么回事 插入代码代">
@@ -751,7 +751,7 @@
 
   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
   <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
+
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
     var guest = 'nick,mail,link';
@@ -759,10 +759,11 @@
       return GUEST.indexOf(item)>-1;
     });
     new Valine({
+        av: AV,
         el: '#comments' ,
         verify: false,
         notify: false,
-        appId: 'thXkwGh2zrirfE6RqbjOAixt-gzGzoHsz# your leancloud application appid',
+        appId: 'thXkwGh2zrirfE6RqbjOAixt-gzGzoHsz',
         appKey: 'c664svjmUwPMTuXueGqF2deB',
         placeholder: 'Just go go',
         avatar:'mm',
