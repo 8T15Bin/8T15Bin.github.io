@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,信号与系统,音频信号处理," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="使用Python解析Wav文件 音频文件及代码已经放在GitHub上了 Wav文件格式Waveform Audio File Format（WAVE，又或者是因为扩展名而被大众所知的WAV），是微软与IBM公司所开发在个人电脑存储音频流的编码格式，在Windows平台的应用软件受到广泛的支持，地位上类似于麦金塔电脑里的">
+<meta name="keywords" content="Python,信号与系统,音频信号处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信号与系统大作业之Python音频信号处理v1.0使用Python解析Wav文件">
+<meta property="og:url" content="http://yoursite.com/2017/12/23/signal/index.html">
+<meta property="og:site_name" content="Bin">
+<meta property="og:description" content="使用Python解析Wav文件 音频文件及代码已经放在GitHub上了 Wav文件格式Waveform Audio File Format（WAVE，又或者是因为扩展名而被大众所知的WAV），是微软与IBM公司所开发在个人电脑存储音频流的编码格式，在Windows平台的应用软件受到广泛的支持，地位上类似于麦金塔电脑里的AIFF。此格式属于资源交换档案格式(RIFF)的应用之一，通常会将采用脉冲编码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/ss/Wave_format.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/1.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/f1.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/t1.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/test.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/ttwav.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/testdb.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/ttdb.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/filterexample.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/filter.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/ttfilter.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/kaiser.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/tthighpass.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/all.png">
+<meta property="og:image" content="http://yoursite.com/images/ss/all1.png">
+<meta property="og:updated_time" content="2017-12-23T11:55:49.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信号与系统大作业之Python音频信号处理v1.0使用Python解析Wav文件">
+<meta name="twitter:description" content="使用Python解析Wav文件 音频文件及代码已经放在GitHub上了 Wav文件格式Waveform Audio File Format（WAVE，又或者是因为扩展名而被大众所知的WAV），是微软与IBM公司所开发在个人电脑存储音频流的编码格式，在Windows平台的应用软件受到广泛的支持，地位上类似于麦金塔电脑里的AIFF。此格式属于资源交换档案格式(RIFF)的应用之一，通常会将采用脉冲编码">
+<meta name="twitter:image" content="http://yoursite.com/images/ss/Wave_format.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/23/signal/"/>
+
+
+
+
+
+  <title>信号与系统大作业之Python音频信号处理v1.0使用Python解析Wav文件 | Bin</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">写点段子，下下馆子</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/23/signal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信号与系统大作业之Python音频信号处理v1.0使用Python解析Wav文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-23T19:03:24+08:00">
+                2017-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/23/signal/" class="leancloud_visitors" data-flag-title="信号与系统大作业之Python音频信号处理v1.0使用Python解析Wav文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,873 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用Python解析Wav文件</p>
+<p>音频文件及代码已经放在<a href="https://github.com/8T15Bin/Python-audio-signal-processing" target="_blank" rel="noopener">GitHub</a>上了</p>
+<h2 id="Wav文件格式"><a href="#Wav文件格式" class="headerlink" title="Wav文件格式"></a>Wav文件格式</h2><p>Waveform Audio File Format（WAVE，又或者是因为扩展名而被大众所知的WAV），是微软与IBM公司所开发在个人电脑存储音频流的编码格式，在Windows平台的应用软件受到广泛的支持，地位上类似于麦金塔电脑里的AIFF。此格式属于资源交换档案格式(RIFF)的应用之一，通常会将采用脉冲编码调制的音频资存储在区块中。也是其音乐发烧友中常用的指定规格之一。由于此音频格式未经过压缩，所以在音质方面不会出现失真的情况，但档案的体积因而在众多音频格式中较为大。通常使用三个参数来表示声音，量化位数，取样频率和采样点振幅。量化位数分为8位，16位，24位三种，声道有单声道和立体声之分，单声道振幅数据为<code>n*1</code>矩阵点，立体声为<code>n*2</code>矩阵点，取样频率一般有11025Hz(11kHz) ，22050Hz(22kHz)和44100Hz(44kHz) 三种。</p>
+<p>WAV文档遵守资源交换档案格式之规则，在文件的前44(或46)字节放置标头(header)，使播放器或编辑器能够简单掌握文件的基本信息，其内容以区块(chunk)为最小单位，每一区块长度为4字节，而区块之上则由子区块包裹，每一子区块长度不拘，但须在前头先宣告标签及长度(字节)。标头的前3个区块日志案格式及长度；接着第一个子区块包含8个区块，记录声道数量、采样率等信息；接着第二个子区块才是真正的音频数据，长度则视音频长度而定。内容如下表所示。须注意的是，每个区块的端序不尽相同，而音频内容本身则是采用小端序。</p>
+<p><img src="/images/ss/Wave_format.png" alt=""></p>
+<p>DATA块内的信息是根据format chunk内的信息而决定的.由量化位数／声道数／采样率共同决定，下图为四种情况下DATA区域存储信息的格式：</p>
+<p><img src="/images/ss/1.png" alt=""></p>
+<h2 id="Python读取WAV文件的信息"><a href="#Python读取WAV文件的信息" class="headerlink" title="Python读取WAV文件的信息"></a>Python读取WAV文件的信息</h2><ul>
+<li>Python自带的Wave库中集成了许多函数，可以打开WAV文件并读出所需要的数据。<ul>
+<li>可以使用<code>wave.open(file,[mode])</code>打开WAV文件，<code>&#39;r&#39;,&#39;rb&#39;</code>是只读格式，<code>&#39;w&#39;,&#39;wb&#39;</code>是只写模式。</li>
+<li>使用Wave库中自带的 <code>Wave_read.getparams()</code> 方法可以读取到WAV文件的参数，返回的参数是一个元组<code>(nchannels, sampwidth, framerate, nframes, comptype, compname)</code></li>
+</ul>
+</li>
+<li>也可以使用<a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.io.wavfile.read.html" target="_blank" rel="noopener">scipy.io.wavfile</a>中的<code>read(&quot;filename&quot;,mmap)</code>返回的值是<code>rate: int , data:numpy array</code>较上一个方法比较简便的是不用再使用<code>numpy.fromstring,numpy.shape,numpy.T</code>等方法对数据进行操作转换成绘图所需要的格式</li>
+</ul>
+<h2 id="使用Numpy和Matplotlib来进行波形图的绘制"><a href="#使用Numpy和Matplotlib来进行波形图的绘制" class="headerlink" title="使用Numpy和Matplotlib来进行波形图的绘制"></a>使用Numpy和Matplotlib来进行波形图的绘制</h2><h3 id="步骤如下"><a href="#步骤如下" class="headerlink" title="步骤如下"></a>步骤如下</h3><ul>
+<li>通过wav库获得WAV文件的头文件中的信息，如采样率／声道数等等.</li>
+<li>提取出DATA区域的信息，用Numpy将string格式数据转化为数组</li>
+<li>通过判定声道数将DATA区域数据进行处理（对数组矩阵进行转换）</li>
+<li>得到每个绘制点的时间（x坐标）</li>
+<li>用Matplotlib库的Pyplot API 提供的方法绘制出波形图</li>
+</ul>
+<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import wave as we</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">def wavread(path):</span><br><span class="line">    wavfile = we.open(path,&quot;rb&quot;)  						#打开WAV文件</span><br><span class="line">    params = wavfile.getparams()  						#获取WAV头文件中的参数</span><br><span class="line">    framerate,frame_wav= params[2],params[3]			#获取采样率和帧数</span><br><span class="line">    datawav = wavfile.readframes(frame_wav)   			#读取每一帧数据</span><br><span class="line">    wavfile.close()										#关闭文件</span><br><span class="line">    datause = np.fromstring(datawav,dtype = np.short)	#将String格式转换成int型数据</span><br><span class="line">    datause.shape = -1,2								#将横向矩阵转为纵向矩阵</span><br><span class="line">    datause = datause.T									#矩阵转置</span><br><span class="line">    time = np.arange(0, frame_wav) * (1.0/framerate)	#返回一个时间长度的list</span><br><span class="line">    return datause,time</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    path = input(&quot;The Path is:&quot;)						#输入WAV文件路径</span><br><span class="line">    wavdata,wavtime = wavread(path)</span><br><span class="line">    plt.subplot(211)									#绘制两行一列图表的第一行</span><br><span class="line">    plt.plot(wavtime, wavdata[0],color = &apos;green&apos;)		#绘制左声道的波形</span><br><span class="line">    plt.subplot(212)									#绘制两行一列图表的第二行</span><br><span class="line">    plt.plot(wavtime, wavdata[1])						#绘制右声道的波形</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h3 id="使用网上下载的test-wav文件并绘制波形"><a href="#使用网上下载的test-wav文件并绘制波形" class="headerlink" title="使用网上下载的test.wav文件并绘制波形"></a>使用网上下载的test.wav文件并绘制波形</h3><p><img src="/images/ss/f1.png" alt=""></p>
+<p><img src="/images/ss/t1.png" alt=""></p>
+<p>可以发现这个WAV文件的左右声道波形完全不一样,说明这是个立体声双声道音频文件。</p>
+<p>通过查阅<code>scipy</code>的文档，发现了一个<code>specgram</code>函数，可以直接绘制WAV文件的语音频谱图，语音频谱图的横坐标是时间，纵坐标是频率，坐标点值为语音数据能量，因而语音频谱图很好的表达了语音的音色随时间变化的趋势。有些经验丰富的人能够通过看语谱图而知道对应的语音信号的内容， 这种技术成为Spectrogram Reading。</p>
+<p>绘制的波形图和语音频谱图如下：</p>
+<p><img src="/images/ss/test.png" alt=""></p>
+<h3 id="使用自己手机录制的WAV文件进行绘图"><a href="#使用自己手机录制的WAV文件进行绘图" class="headerlink" title="使用自己手机录制的WAV文件进行绘图"></a>使用自己手机录制的WAV文件进行绘图</h3><p><img src="/images/ss/ttwav.png" alt=""></p>
+<p>图中的波形是录制的“啊”的声音波形。</p>
+<h2 id="使用Numpy、Scipy和matplotlib来绘制频谱图"><a href="#使用Numpy、Scipy和matplotlib来绘制频谱图" class="headerlink" title="使用Numpy、Scipy和matplotlib来绘制频谱图"></a>使用Numpy、Scipy和matplotlib来绘制频谱图</h2><h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import wave as we</span><br><span class="line">import scipy</span><br><span class="line">from scipy.io.wavfile import read</span><br><span class="line">import numpy as np</span><br><span class="line">from scipy.signal import hann</span><br><span class="line">from scipy.fftpack import rfft</span><br><span class="line">import matplotlib.pyplot as plt  				 	# 引入所需要的包</span><br><span class="line"></span><br><span class="line">path = input(&quot;The Path is:&quot;)</span><br><span class="line">wavfile = we.open(path,&quot;rb&quot;)  						#打开文件</span><br><span class="line">params = wavfile.getparams()</span><br><span class="line">framerate = params[2]</span><br><span class="line">framerate,frameswav= params[2],params[3]			#读取所需要的参数</span><br><span class="line">datawav = wavfile.readframes(frameswav)</span><br><span class="line">wavfile.close()</span><br><span class="line">time = np.arange(0, frameswav) * (1.0/framerate)</span><br><span class="line">datause = np.fromstring(datawav,dtype = np.short)</span><br><span class="line">window = hann(1024)									#使用窗函数，引入汉宁窗</span><br><span class="line">datause.shape = -1,2</span><br><span class="line">datause = datause.T</span><br><span class="line">left = datause[0]</span><br><span class="line">right = datause[1]</span><br><span class="line">left_use = left[0:1024] * window					#取信号前1024帧乘以窗函数</span><br><span class="line">left_mag = 20 * scipy.log10(abs(rfft(left_use)))	#对左声道的信号做快速傅里叶变换并取对数</span><br><span class="line">left_mag -= max(left_mag)</span><br><span class="line">right_use = right[0:1024] * window</span><br><span class="line">right_mag = 20 * scipy.log10(abs(rfft(right_use)))	#对右声道的信号做快速傅里叶变换并取对数</span><br><span class="line">right_mag -= max(right_mag)</span><br><span class="line">plt.subplot(211)									#绘图</span><br><span class="line">plt.plot(left_mag,color = &apos;green&apos;)</span><br><span class="line">plt.title(&quot;Flute Spectrum&quot;)</span><br><span class="line">plt.ylabel(&quot;Magnitude(dB)&quot;)</span><br><span class="line">plt.xlabel(&quot;Frequency Bin&quot;)</span><br><span class="line">plt.subplot(212)</span><br><span class="line">plt.plot(right_mag)</span><br><span class="line">plt.title(&quot;Flute Spectrum&quot;)</span><br><span class="line">plt.ylabel(&quot;Magnitude(dB)&quot;)</span><br><span class="line">plt.xlabel(&quot;Frequency Bin&quot;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="使用test-wav文件绘制的频谱图如下："><a href="#使用test-wav文件绘制的频谱图如下：" class="headerlink" title="使用test.wav文件绘制的频谱图如下："></a>使用test.wav文件绘制的频谱图如下：</h3><p><img src="/images/ss/testdb.png" alt=""></p>
+<h3 id="使用自己录制的WAV文件绘制的频谱图如下："><a href="#使用自己录制的WAV文件绘制的频谱图如下：" class="headerlink" title="使用自己录制的WAV文件绘制的频谱图如下："></a>使用自己录制的WAV文件绘制的频谱图如下：</h3><p><img src="/images/ss/ttdb.png" alt=""></p>
+<h2 id="使信号通过数字滤波器"><a href="#使信号通过数字滤波器" class="headerlink" title="使信号通过数字滤波器"></a>使信号通过数字滤波器</h2><h3 id="数字滤波器"><a href="#数字滤波器" class="headerlink" title="数字滤波器"></a>数字滤波器</h3><p>数字滤波器是对数字信号进行滤波处理以得到期望的响应特性的离散时间系统。作为一种电子滤波器，数字滤波器与完全工作在模拟信号域的模拟滤波器不同。数字滤波器工作在数字信号域，它处理的对象是经由采样器件将模拟信号转换而得到的数字信号。数字滤波器具有比模拟滤波器更高的精度，甚至能够实现后者在理论上也无法达到的性能。例如，对于数字滤波器来说很容易就能够做到一个1000Hz的低通滤波器允许999Hz信号通过并且完全阻止1001Hz的信号，模拟滤波器无法区分如此接近的信号。由于奈奎斯特采样定理（Nyquist sampling theorem），数字滤波器的处理能力受到系统采样频率的限制。如果输入信号的频率分量包含超过滤波器1/2采样频率的分量时，数字滤波器因为数字系统的“混叠”而不能正常工作。如果超出1/2采样频率的频率分量不占主要地位，通常的解决办法是在模数转换电路之前放置一个低通滤波器（即抗混叠滤波器）将超过的高频成分滤除。否则就必须用模拟滤波器实现要求的功能。</p>
+<h3 id="设计数字滤波器"><a href="#设计数字滤波器" class="headerlink" title="设计数字滤波器"></a>设计数字滤波器</h3><p>可以使用<code>scipy.signal</code>包中的<code>firwin(),firwin2()</code>函数来进行FIR滤波器的设计。</p>
+<p>可以参考<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.firwin.html" target="_blank" rel="noopener">Scipy.Signal.Firwin()的官方文档</a>来设计滤波器，官方文档上也给出了很多滤波器的例子，如下图所示：</p>
+<p><img src="/images/ss/filterexample.png" alt=""></p>
+<h3 id="使用Hann窗滤波器"><a href="#使用Hann窗滤波器" class="headerlink" title="使用Hann窗滤波器"></a>使用Hann窗滤波器</h3><p>Hann窗函数低通滤波器的频率响应图和相位图如下所示：</p>
+<p><img src="/images/ss/filter.png" alt=""></p>
+<p>将WAV的数据文件转换成Numpy中的Array后和滤波器进行卷积，<code>numpy.convolve()</code>方法可以实现信号和滤波器的卷积，经过滤波后的结果如图</p>
+<p><img src="/images/ss/ttfilter.png" alt=""></p>
+<p>与未经过滤波器的波形相对比，可以发现高频部分有一定程度的衰减。</p>
+<h3 id="使用Kaiser窗滤波器"><a href="#使用Kaiser窗滤波器" class="headerlink" title="使用Kaiser窗滤波器"></a>使用Kaiser窗滤波器</h3><p>Kaiser窗高通滤波器的频率响应和相位图如下图所示：<img src="/images/ss/kaiser.png" alt=""></p>
+<p>将WAV文件的数据信号与滤波器进行卷积，经过滤波后的结果如图所示范：</p>
+<p><img src="/images/ss/tthighpass.png" alt=""></p>
+<p>可以很明显的看到，低频部分的信号被极大程度的衰减，可以说是成功完成了滤波。</p>
+<h3 id="代码如下-1"><a href="#代码如下-1" class="headerlink" title="代码如下"></a>代码如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">import wave as we</span><br><span class="line">import scipy</span><br><span class="line">import numpy as np</span><br><span class="line">from scipy.signal import *</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># 读取WAV文件数据</span><br><span class="line">def wavread(path):</span><br><span class="line">    wavfile = we.open(path,&apos;rb&apos;)</span><br><span class="line">    params = wavfile.getparams()</span><br><span class="line">    framerate,framewave = params[2],params[3]</span><br><span class="line">    datawav = wavfile.readframes(framewave)</span><br><span class="line">    wavfile.close()</span><br><span class="line">    audio = np.fromstring(datawav,dtype=np.short)</span><br><span class="line">    audio.shape = -1,2</span><br><span class="line">    audio = audio.T</span><br><span class="line">    time = np.arange(0,framewave,1.0/framerate)</span><br><span class="line">    return audio,time,framerate</span><br><span class="line"></span><br><span class="line"># 处理WAV文件数据</span><br><span class="line">def fft_filter(signal):</span><br><span class="line">    sampling_rate = 44100</span><br><span class="line">    fft_size = 2200</span><br><span class="line">    win = hann(2200)</span><br><span class="line">    f1 = firwin(101,0.5,window=(&apos;kaiser&apos;,8),pass_zero = False)</span><br><span class="line">    freqs = np.linspace(0,sampling_rate/2,fft_size/2+1)</span><br><span class="line">    xs = signal[5800:8000] * win</span><br><span class="line">    xc = np.convolve(xs,f1,mode=&apos;same&apos;)</span><br><span class="line">    xf = np.fft.rfft(xc)/fft_size</span><br><span class="line">    xn = np.fft.rfft(xs)/fft_size</span><br><span class="line">    xfp = 20*np.log10(np.clip(np.abs(xf), 1e-20, 1e100))</span><br><span class="line">    xfn = 20*np.log10(np.clip(np.abs(xn), 1e-20, 1e100))</span><br><span class="line">    return xfp,freqs,xc,xs,xfn</span><br><span class="line"></span><br><span class="line"># 绘图</span><br><span class="line">def main():</span><br><span class="line">    path = input(&quot;The path is:&quot;)</span><br><span class="line">    audio,time,framerate = wavread(path)</span><br><span class="line">    audio_left = audio[0]</span><br><span class="line">    audio_right = audio[1]</span><br><span class="line">    y1,x1,z1,k1,n1 = fft_filter(audio_left)</span><br><span class="line">    y2,x2,z2,k2,n2 = fft_filter(audio_right)</span><br><span class="line">    plt.subplot(421)</span><br><span class="line">    plt.plot(time[5800:8000],k1,color = &apos;green&apos;)</span><br><span class="line">    plt.subplot(422)</span><br><span class="line">    plt.plot(time[5800:8000],k2)</span><br><span class="line">    plt.subplot(423)</span><br><span class="line">    plt.plot(time[5800:8000],z1,color=&apos;green&apos;)</span><br><span class="line">    plt.title(&quot;Filter Output&quot;)</span><br><span class="line">    plt.xlabel(&quot;Frequency(Hz)&quot;)</span><br><span class="line">    plt.subplot(424)</span><br><span class="line">    plt.plot(time[5800:8000],z2)</span><br><span class="line">    plt.title(&quot;Filter Output&quot;)</span><br><span class="line">    plt.xlabel(&quot;Frequency(Hz)&quot;)</span><br><span class="line">    plt.subplot(425)</span><br><span class="line">    plt.plot(x1,n1,color=&apos;green&apos;)</span><br><span class="line">    plt.title(&quot;Flute Spectrum Before Filter&quot;)</span><br><span class="line">    plt.ylabel(&quot;Magnitude(dB)&quot;)</span><br><span class="line">    plt.xlabel(&quot;Frequency(Hz)&quot;)</span><br><span class="line">    plt.subplot(426)</span><br><span class="line">    plt.plot(x2,n2)</span><br><span class="line">    plt.title(&quot;Flute Spectrum Before Filter&quot;)</span><br><span class="line">    plt.ylabel(&quot;Magnitude(dB)&quot;)</span><br><span class="line">    plt.xlabel(&quot;Frequency(Hz)&quot;)</span><br><span class="line">    plt.subplot(427)</span><br><span class="line">    plt.plot(x1,y1,color=&apos;green&apos;)</span><br><span class="line">    plt.title(&quot;Flute Spectrum&quot;)</span><br><span class="line">    plt.ylabel(&quot;Magnitude(dB)&quot;)</span><br><span class="line">    plt.xlabel(&quot;Frequency(Hz)&quot;)</span><br><span class="line">    plt.subplot(428)</span><br><span class="line">    plt.plot(x2,y2)</span><br><span class="line">    plt.title(&quot;Flute Spectrum&quot;)</span><br><span class="line">    plt.ylabel(&quot;Magnitude(dB)&quot;)</span><br><span class="line">    plt.xlabel(&quot;Frequency(Hz)&quot;)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><p>左侧为左声道信号，右侧为右声道信号</p>
+<ul>
+<li>第一行所示图片为原始信号</li>
+<li>第二行所示图片为经过滤波器后得到的信号</li>
+<li>第三行所示图片为原始信号的频域图</li>
+<li>第四行所示图片为经过滤波器后信号的频域图</li>
+</ul>
+<p><img src="/images/ss/all.png" alt=""></p>
+<p><img src="/images/ss/all1.png" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://bigsec.net/b52/scipydoc/frequency_process.html" target="_blank" rel="noopener">频域信号处理-用Python做科学计算</a></li>
+<li><a href="http://www.cnblogs.com/lzxwalex/p/6922099.html" target="_blank" rel="noopener">Python解析WAV文件并绘制波形的方法 xlxw‘s blog</a></li>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/" target="_blank" rel="noopener">Numpy Reference</a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/" target="_blank" rel="noopener">Scipy Reference</a></li>
+<li><a href="https://matplotlib.org/api/pyplot_summary.html" target="_blank" rel="noopener">Matplotlib Pyplot API</a></li>
+<li>Python For Audio Signal Processing by John GLOVER, Victor LAZZARINI and Joseph TIMONEY. The Sound and Digital Music Research Group National University of Ireland, Maynooth Ireland. {John.C.Glover, Victor.Lazzarinig}@nuim.ie JTimoney@cs.nuim.ie</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/信号与系统/" rel="tag"># 信号与系统</a>
+          
+            <a href="/tags/音频信号处理/" rel="tag"># 音频信号处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/08/taiwan/" rel="next" title="台湾酒店，大家挑一下">
+                <i class="fa fa-chevron-left"></i> 台湾酒店，大家挑一下
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjEyOS84Njkz"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang1.jpg"
+                alt="Bin" />
+            
+              <p class="site-author-name" itemprop="name">Bin</p>
+              <p class="site-description motion-element" itemprop="description">转行吧，趁早啊，反正头发迟早要掉光光的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/8T15Bin" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wav文件格式"><span class="nav-number">1.</span> <span class="nav-text">Wav文件格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python读取WAV文件的信息"><span class="nav-number">2.</span> <span class="nav-text">Python读取WAV文件的信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Numpy和Matplotlib来进行波形图的绘制"><span class="nav-number">3.</span> <span class="nav-text">使用Numpy和Matplotlib来进行波形图的绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤如下"><span class="nav-number">3.1.</span> <span class="nav-text">步骤如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下"><span class="nav-number">3.2.</span> <span class="nav-text">代码如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用网上下载的test-wav文件并绘制波形"><span class="nav-number">3.3.</span> <span class="nav-text">使用网上下载的test.wav文件并绘制波形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用自己手机录制的WAV文件进行绘图"><span class="nav-number">3.4.</span> <span class="nav-text">使用自己手机录制的WAV文件进行绘图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Numpy、Scipy和matplotlib来绘制频谱图"><span class="nav-number">4.</span> <span class="nav-text">使用Numpy、Scipy和matplotlib来绘制频谱图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">4.1.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用test-wav文件绘制的频谱图如下："><span class="nav-number">4.2.</span> <span class="nav-text">使用test.wav文件绘制的频谱图如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用自己录制的WAV文件绘制的频谱图如下："><span class="nav-number">4.3.</span> <span class="nav-text">使用自己录制的WAV文件绘制的频谱图如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使信号通过数字滤波器"><span class="nav-number">5.</span> <span class="nav-text">使信号通过数字滤波器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字滤波器"><span class="nav-number">5.1.</span> <span class="nav-text">数字滤波器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计数字滤波器"><span class="nav-number">5.2.</span> <span class="nav-text">设计数字滤波器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Hann窗滤波器"><span class="nav-number">5.3.</span> <span class="nav-text">使用Hann窗滤波器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Kaiser窗滤波器"><span class="nav-number">5.4.</span> <span class="nav-text">使用Kaiser窗滤波器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下-1"><span class="nav-number">5.5.</span> <span class="nav-text">代码如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘图"><span class="nav-number">5.6.</span> <span class="nav-text">绘图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">®Bin</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">3.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("thXkwGh2zrirfE6RqbjOAixt-gzGzoHsz", "c664svjmUwPMTuXueGqF2deB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
